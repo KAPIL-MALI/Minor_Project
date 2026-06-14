@@ -1,0 +1,131 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply antialiased text-base-content bg-base-100 transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply backdrop-blur-2xl backdrop-saturate-[180%] bg-white/[0.65] dark:bg-[#1C1C1E]/[0.65] border border-white/[0.2] dark:border-white/[0.1] shadow-lg;
+  }
+  
+  .glass-card {
+    @apply backdrop-blur-2xl backdrop-saturate-[180%] bg-white/[0.65] dark:bg-[#2C2C2E]/[0.65] border border-white/[0.2] dark:border-white/[0.1] shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 rounded-2xl;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Custom scrollbar for editor/panels */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-base-content/20 rounded-full;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-base-content/40;
+  }
+}
+
+/* Markdown Styles */
+.prose pre {
+  @apply bg-base-200 text-base-content rounded-lg p-4 overflow-x-auto border border-base-content/10 my-4;
+}
+
+.prose code {
+  @apply bg-base-200 px-1.5 py-0.5 rounded text-primary text-sm font-mono;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-inherit;
+}
+
+.prose p {
+  @apply mb-4 leading-relaxed;
+}
+
+.prose ul {
+  @apply list-disc list-inside mb-4 ml-2;
+}
+
+.prose strong {
+  @apply font-semibold text-base-content;
+}
+
+/* ── Activity Heatmap ─────────────────────────────────────── */
+:root {
+  --hm-bg:  #1e2128;
+  --hm-0:   #1e2128;
+  --hm-1:   #0e4429;
+  --hm-2:   #006d32;
+  --hm-3:   #26a641;
+  --hm-4:   #39d353;
+}
+
+[data-theme="light"] {
+  --hm-bg:  #ebedf0;
+  --hm-0:   #ebedf0;
+  --hm-1:   #9be9a8;
+  --hm-2:   #40c463;
+  --hm-3:   #30a14e;
+  --hm-4:   #216e39;
+}
+
+.heatmap-cell {
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  transform-origin: center;
+}
+.heatmap-cell:hover {
+  opacity: 0.85;
+  outline: 1.5px solid rgba(255,255,255,0.35);
+  outline-offset: 0px;
+}
+
+.heatmap-container {
+  position: relative;
+}
+
+.heatmap-tooltip {
+  position: absolute;
+  background: rgba(15, 17, 22, 0.92);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 50;
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+  transform: translateX(-50%);
+}
+.heatmap-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: rgba(15, 17, 22, 0.92);
+}
